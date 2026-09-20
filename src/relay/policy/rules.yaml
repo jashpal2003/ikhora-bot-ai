@@ -1,0 +1,48 @@
+policy_version: "v1.0"
+rules:
+  - id: emergency_kill_switch
+    when:
+      kill_switch_active: true
+    then: deny
+    reason: "Tool execution halted by emergency kill switch (Scenario S17)"
+
+  - id: unverified_no_account_data
+    when:
+      identity_tier_below: verified
+      action_touches: customer_account
+    then: deny
+    reason: "Customer identity is not verified"
+
+  - id: refund_threshold
+    when:
+      action: shopify.refund_create
+      amount_gt: 50.00
+    then: require_approval
+    route:
+      role: support_manager
+      sla_minutes: 120
+      channel: teams
+    reason: "Refunds above $50 require manager approval"
+
+  - id: protected_topic_legal
+    when:
+      knowledge_topic_in:
+        - legal
+        - hr
+        - compliance
+    then: require_approval
+    route:
+      role: compliance
+      sla_minutes: 60
+      channel: teams
+    reason: "Actions involving legal or compliance topics require human approval"
+
+  - id: new_skill_probation
+    when:
+      skill_age_days_lt: 14
+    then: require_approval
+    route:
+      role: support_lead
+      sla_minutes: 240
+      channel: teams
+    reason: "Progressive autonomy: new skills start in review mode"

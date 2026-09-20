@@ -1,6 +1,6 @@
 """Ticket models and handoff packet schemas."""
 
-from datetime import datetime
+from datetime import datetime, timezone
 from enum import Enum
 from typing import Any
 from pydantic import BaseModel, Field
@@ -25,7 +25,7 @@ class HandoffPacket(BaseModel):
     actions_attempted: list[dict[str, Any]] = Field(default_factory=list)
     suggested_operator_action: str | None = None
     evidence_refs: list[str] = Field(default_factory=list)
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 class Ticket(BaseModel):

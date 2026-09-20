@@ -1,8 +1,8 @@
-"""Relay platform utilities."""
-
+from relay.platform.database import AsyncSessionFactory, engine, get_session
+from relay.platform.errors import PolicyDeniedError, RelayError, TenantContextMissingError
 from relay.platform.ids import generate_id, validate_id_prefix
-from relay.platform.tenancy import tenant_scope, get_current_tenant_id
-from relay.platform.errors import RelayError, TenantContextMissingError, PolicyDeniedError
+from relay.platform.models import Base
+from relay.platform.tenancy import get_current_tenant_id, tenant_scope
 
 __all__ = [
     "generate_id",
@@ -12,4 +12,8 @@ __all__ = [
     "RelayError",
     "TenantContextMissingError",
     "PolicyDeniedError",
+    "engine",
+    "AsyncSessionFactory",
+    "get_session",
+    "Base",
 ]

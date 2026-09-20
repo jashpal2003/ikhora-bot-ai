@@ -28,6 +28,22 @@ class PolicyEngine:
         skill_age_days = context.get("skill_age_days", 30)
         knowledge_topics = context.get("knowledge_topics", [])
 
+        # Rule 0: Emergency Kill Switch / Tool Disable (Scenario S17)
+        if context.get("kill_switch_active", False) or context.get("tool_disabled", False):
+            matched_rules.append("emergency_kill_switch")
+            reasons.append(
+                Reason(
+                    code="KILL_SWITCH_ACTIVE",
+                    message=f"Action '{action.tool_name}' halted by administrator emergency kill switch.",
+                )
+            )
+            return Verdict(
+                decision="deny",
+                reasons=reasons,
+                matched_rules=matched_rules,
+                policy_version=self.policy_version,
+            )
+
         # Rule 1: Identity verification gating (P1, §12.2)
         # Unverified customer accounts cannot touch customer private data or write
         if identity_tier in ("anonymous", "weak") and action.side_effect in ("write", "destructive", "financial"):
