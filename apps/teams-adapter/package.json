@@ -1,0 +1,21 @@
+{
+  "name": "@relay/teams-adapter",
+  "version": "0.1.0",
+  "description": "Microsoft Teams M365 Agents SDK Channel Adapter (ADR 010)",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx watch src/index.ts"
+  },
+  "dependencies": {
+    "@microsoft/agents-hosting": "^0.1.0",
+    "@microsoft/agents-hosting-teams": "^0.1.0",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "tsx": "^4.19.0",
+    "@types/node": "^20.14.10"
+  }
+}

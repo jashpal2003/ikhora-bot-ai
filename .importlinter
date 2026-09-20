@@ -1,0 +1,62 @@
+[importlinter]
+root_package = "relay"
+
+[importlinter:contract:layers]
+name = "Relay Modulith Layering Contract"
+type = "layers"
+layers = [
+    "api",
+    "analytics",
+    "agent",
+    "tools",
+    "policy",
+    "decisions",
+    "knowledge",
+    "tickets",
+    "conversations",
+    "identity",
+    "audit",
+    "events",
+    "platform",
+]
+containers = [
+    "relay",
+]
+
+[importlinter:contract:forbidden_channels]
+name = "Domain modules must not import channels directly"
+type = "forbidden"
+source_modules = [
+    "relay.identity",
+    "relay.conversations",
+    "relay.tickets",
+    "relay.knowledge",
+    "relay.decisions",
+    "relay.policy",
+    "relay.agent",
+    "relay.audit",
+]
+forbidden_modules = [
+    "relay.channels.whatsapp",
+    "relay.channels.teams",
+    "relay.channels.web",
+]
+
+[importlinter:contract:forbidden_connectors]
+name = "Domain modules must not import connector internals directly"
+type = "forbidden"
+source_modules = [
+    "relay.identity",
+    "relay.conversations",
+    "relay.tickets",
+    "relay.knowledge",
+    "relay.decisions",
+    "relay.policy",
+    "relay.agent",
+    "relay.audit",
+]
+forbidden_modules = [
+    "relay.connectors.graph",
+    "relay.connectors.dataverse",
+    "relay.connectors.shopify",
+]

@@ -1,0 +1,16 @@
+{
+  "name": "@relay/widget",
+  "version": "0.1.0",
+  "description": "Preact Shadow DOM Customer Web Widget (<40KB gzipped)",
+  "main": "dist/widget.js",
+  "scripts": {
+    "build": "vite build"
+  },
+  "dependencies": {
+    "preact": "^10.23.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "vite": "^5.4.2"
+  }
+}
