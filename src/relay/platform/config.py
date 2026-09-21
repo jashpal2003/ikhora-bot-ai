@@ -29,6 +29,10 @@ class RelaySettings(BaseSettings):
 
     # LLM & Decision Providers
     default_llm_model: str = "gpt-4o-mini"
+    azure_openai_api_key: str | None = None
+    azure_openai_endpoint: str | None = None
+    azure_openai_api_version: str | None = "2024-02-15-preview"
+    azure_openai_deployment_name: str | None = None
     jev_api_url: str | None = None
     jev_api_key: str | None = None
 
