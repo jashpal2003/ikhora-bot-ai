@@ -4,6 +4,7 @@ from relay.decisions.models import Answer, DecisionRequest, Question, TypedDecis
 from relay.decisions.provider import DecisionProvider
 from relay.decisions.rule_based import RuleDecisionProvider
 from relay.decisions.small_llm import SmallLLMDecisionProvider
+from relay.decisions.azure_openai import AzureOpenAIDecisionProvider
 
 __all__ = [
     "DecisionRequest",
@@ -12,6 +13,7 @@ __all__ = [
     "Answer",
     "DecisionProvider",
     "SmallLLMDecisionProvider",
+    "AzureOpenAIDecisionProvider",
     "JevDecisionProvider",
     "RuleDecisionProvider",
     "CalibrationMetrics",

@@ -5,7 +5,7 @@ from temporalio import activity
 
 from relay.agent.models import PlanStep, RunContext
 from relay.decisions.models import DecisionRequest, Question
-from relay.decisions.small_llm import SmallLLMDecisionProvider
+from relay.decisions.azure_openai import AzureOpenAIDecisionProvider
 from relay.policy.engine import PolicyEngine
 from relay.policy.models import ActionRef, Principal, ResourceRef, Verdict
 
@@ -13,7 +13,7 @@ from relay.policy.models import ActionRef, Principal, ResourceRef, Verdict
 @activity.defn
 async def classify_intent_activity(ctx: RunContext) -> dict[str, Any]:
     """Classify incoming intent and assess priority."""
-    provider = SmallLLMDecisionProvider()
+    provider = AzureOpenAIDecisionProvider()
     req = DecisionRequest(
         state={"user_message": ctx.user_message},
         questions=[
